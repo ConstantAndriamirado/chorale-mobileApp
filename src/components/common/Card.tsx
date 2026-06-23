@@ -1,6 +1,6 @@
-import React from 'react';
-import { View, ViewStyle } from 'react-native';
-import { Colors } from '../../constants/theme';
+import React from "react";
+import { View, ViewStyle } from "react-native";
+import { useAppSettings } from "../../hooks/useAppSettings";
 
 type CardProps = {
   children: React.ReactNode;
@@ -8,14 +8,16 @@ type CardProps = {
 };
 
 export function Card({ children, style }: CardProps) {
+  const { colors } = useAppSettings();
+
   return (
     <View
       style={[
         {
-          backgroundColor: Colors.white,
+          backgroundColor: colors.card,
           borderRadius: 16,
           padding: 16,
-          shadowColor: '#000',
+          shadowColor: "#000",
           shadowOffset: { width: 0, height: 4 },
           shadowOpacity: 0.08,
           shadowRadius: 16,

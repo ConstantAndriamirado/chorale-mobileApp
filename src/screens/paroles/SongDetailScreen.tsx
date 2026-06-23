@@ -1,25 +1,230 @@
-import React from 'react';
-import { SafeAreaView, View, Text, StyleSheet, ScrollView } from 'react-native';
-import { RouteProp, useRoute } from '@react-navigation/native';
-import { Button } from '../../components/common/Button';
-import { Colors } from '../../constants/theme';
-import { AppStackParamList } from '../../navigation/AppNavigator';
+import { MaterialIcons } from "@expo/vector-icons";
+import {
+  NavigationProp,
+  RouteProp,
+  useNavigation,
+  useRoute,
+} from "@react-navigation/native";
+import React, { useEffect, useState } from "react";
+import {
+  Alert,
+  Pressable,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
+import { Button } from "../../components/common/Button";
+import { useAppSettings } from "../../hooks/useAppSettings";
+import { AppStackParamList } from "../../navigation/AppNavigator";
+import { isDownloaded } from "../../services/download/downloadService";
 
 export default function SongDetailScreen() {
-  const route = useRoute<RouteProp<AppStackParamList, 'SongDetail'>>();
+  const navigation = useNavigation<NavigationProp<AppStackParamList>>();
+  const route = useRoute<RouteProp<AppStackParamList, "SongDetail">>();
   const { song } = route.params;
+  const { colors, fontFamilyName, fontScale } = useAppSettings();
+  // Download states
+  const [solfaDownloaded, setSolfaDownloaded] = useState(false);
+  const [mp3Downloaded, setMp3Downloaded] = useState(false);
+  const [playbackDownloaded, setPlaybackDownloaded] = useState(false);
+
+  // Load download states
+  useEffect(() => {
+    const checkDownloads = async () => {
+      if (song.hasSolfa) {
+        const solfa = await isDownloaded(song.solfaFileName);
+        setSolfaDownloaded(solfa);
+      }
+      if (song.hasMp3) {
+        const mp3 = await isDownloaded(song.mp3FileName);
+        setMp3Downloaded(mp3);
+      }
+      if (song.hasPlayback) {
+        const pb = await isDownloaded(song.playbackFileName);
+        setPlaybackDownloaded(pb);
+      }
+    };
+    checkDownloads();
+  }, [song]);
+
+  // Solfa button handler
+  const handleSolfaPress = () => {
+    if (solfaDownloaded) {
+      Alert.alert("Info", "Ouverture du fichier Solfa");
+    } else {
+      if (!song.hasSolfa) {
+        Alert.alert("Info", "Solfa non disponible pour cette chanson");
+        return;
+      }
+      // Navigate to nested Solfa tab via Main
+      navigation.navigate("Main", {
+        screen: "Solfa",
+      });
+    }
+  };
+
+  // MP3 button handler
+  const handleMp3Press = () => {
+    if (mp3Downloaded) {
+      Alert.alert("Lecteur MP3", "Ouverture du lecteur pour ce fichier");
+    } else {
+      if (!song.hasMp3) {
+        Alert.alert("Info", "MP3 non disponible pour cette chanson");
+        return;
+      }
+      // Show alert with options
+      Alert.alert("Lire MP3", "Sélectionnez une option", [
+        {
+          text: "Jouer en ligne",
+          onPress: () => {
+            Alert.alert("Lecteur", "Lecture en ligne du fichier MP3", [
+              { text: "OK" },
+            ]);
+          },
+        },
+        {
+          text: "Télécharger",
+          onPress: () => {
+            // Navigate to nested MP3 tab via Main
+            navigation.navigate("Main", {
+              screen: "MP3",
+            });
+          },
+        },
+        {
+          text: "Annuler",
+          onPress: () => {},
+          style: "cancel",
+        },
+      ]);
+    }
+  };
+
+  // Playback button handler
+  const handlePlaybackPress = () => {
+    if (playbackDownloaded) {
+      Alert.alert("Lecteur Playback", "Ouverture du lecteur pour ce fichier");
+    } else {
+      if (!song.hasPlayback) {
+        Alert.alert("Info", "Playback non disponible pour cette chanson");
+        return;
+      }
+      // Show alert with options
+      Alert.alert("Lire Playback", "Sélectionnez une option", [
+        {
+          text: "Jouer en ligne",
+          onPress: () => {
+            Alert.alert("Lecteur", "Lecture en ligne du fichier Playback", [
+              { text: "OK" },
+            ]);
+          },
+        },
+        {
+          text: "Télécharger",
+          onPress: () => {
+            // Navigate to nested Playback tab via Main
+            navigation.navigate("Main", {
+              screen: "Playback",
+            });
+          },
+        },
+        {
+          text: "Annuler",
+          onPress: () => {},
+          style: "cancel",
+        },
+      ]);
+    }
+  };
+
+  // Get button text
+  const getSolfaButtonText = () => {
+    if (!song.hasSolfa) return "Solfa indisponible";
+    return solfaDownloaded ? "Ouvrir Solfa" : "Télécharger Solfa";
+  };
+
+  const getMp3ButtonText = () => {
+    if (!song.hasMp3) return "MP3 indisponible";
+    return mp3Downloaded ? "Jouer MP3" : "Télécharger MP3";
+  };
+
+  const getPlaybackButtonText = () => {
+    if (!song.hasPlayback) return "Playback indisponible";
+    return playbackDownloaded ? "Jouer Playback" : "Télécharger Playback";
+  };
 
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <ScrollView contentContainerStyle={styles.container}>
-        <Text style={styles.title}>{song.title}</Text>
-        <Text style={styles.lyrics}>{song.lyrics}</Text>
-        <View style={styles.actions}> 
-          <Button title="Ouvrir Solfa" onPress={() => {}} variant="primary" />
-          <Button title="Ouvrir MP3" onPress={() => {}} variant="secondary" />
-          <Button title="Ouvrir Playback" onPress={() => {}} variant="secondary" />
-        </View>
+    <SafeAreaView
+      style={[styles.safeArea, { backgroundColor: colors.background }]}
+    >
+      {/* Header with back button */}
+      <View style={[styles.header, { borderBottomColor: colors.border }]}>
+        <Pressable
+          style={styles.backButton}
+          onPress={() => navigation.goBack()}
+        >
+          <MaterialIcons name="arrow-back" size={24} color={colors.text} />
+        </Pressable>
+        <Text
+          style={[
+            styles.headerTitle,
+            {
+              color: colors.text,
+              fontFamily: fontFamilyName,
+              fontSize: 18 * fontScale,
+            },
+          ]}
+        >
+          {song.title}
+        </Text>
+        <View style={styles.placeholder} />
+      </View>
+
+      {/* Scrollable lyrics */}
+      <ScrollView
+        style={styles.scrollContainer}
+        contentContainerStyle={[
+          styles.scrollContent,
+          { backgroundColor: colors.background },
+        ]}
+      >
+        <Text
+          style={[
+            styles.lyrics,
+            {
+              color: colors.textSecondary,
+              fontSize: 16 * fontScale,
+              fontFamily: fontFamilyName,
+            },
+          ]}
+        >
+          {song.lyrics}
+        </Text>
       </ScrollView>
+
+      {/* Bottom action buttons */}
+      <View style={[styles.buttonContainer, { borderTopColor: colors.border }]}>
+        <Button
+          title={getSolfaButtonText()}
+          onPress={handleSolfaPress}
+          variant="primary"
+          disabled={!song.hasSolfa}
+        />
+        <Button
+          title={getMp3ButtonText()}
+          onPress={handleMp3Press}
+          variant="secondary"
+          disabled={!song.hasMp3}
+        />
+        <Button
+          title={getPlaybackButtonText()}
+          onPress={handlePlaybackPress}
+          variant="secondary"
+          disabled={!song.hasPlayback}
+        />
+      </View>
     </SafeAreaView>
   );
 }
@@ -27,25 +232,43 @@ export default function SongDetailScreen() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: Colors.grey,
   },
-  container: {
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderBottomWidth: 1,
+  },
+  backButton: {
+    padding: 8,
+  },
+  headerTitle: {
+    fontSize: 18,
+    fontWeight: "700",
+    flex: 1,
+    textAlign: "center",
+    marginHorizontal: 8,
+  },
+  placeholder: {
+    width: 40,
+  },
+  scrollContainer: {
+    flex: 1,
+    marginTop: 24,
+  },
+  scrollContent: {
     padding: 20,
   },
-  title: {
-    fontSize: 28,
-    fontWeight: '800',
-    color: Colors.dark,
-    marginBottom: 16,
-  },
   lyrics: {
-    color: '#334155',
-    fontSize: 16,
     lineHeight: 24,
-    marginBottom: 24,
   },
-  actions: {
-    flexDirection: 'column',
-    rowGap: 12,
+  buttonContainer: {
+    paddingHorizontal: 20,
+    paddingVertical: 16,
+    paddingBottom: 80,
+    gap: 12,
+    borderTopWidth: 1,
   },
 });

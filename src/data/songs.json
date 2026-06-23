@@ -2,7 +2,7 @@
   {
     "id": "1",
     "title": "Antema Fiderana",
-    "lyrics": "Antema fiderana ho an'Andriamanitra, ny fitahiana tokoa...",
+    "lyrics": "Antema fiderana ho an'Andriamanitra, ny fitahiana tokoa.\nAntema fiderana, miloloha anay, ny fitahiana tokoa.\nMijory anay ao amin'ny fitahiana, ny tranon'ny baiko.\nMijory anay ao amin'ny fitahiana, ny fiadanana sy fahafahana.\nAntema fiderana ho an'Andriamanitra, ny fitahiana tokoa.\nAntema fiderana, miloloha anay, ny fitahiana tokoa.",
     "hasSolfa": true,
     "hasMp3": true,
     "hasPlayback": true,
@@ -13,7 +13,7 @@
   {
     "id": "2",
     "title": "Tanana An-tanana",
-    "lyrics": "Tanana an-tanana isika, handeha hanome voninahitra...",
+    "lyrics": "Tanana an-tanana isika, handeha hanome voninahitra.\nTanana an-tanana isika, handeha hanome fiderana.\nHo an'ny Ray sy Zanaka, ary fanahy masina.\nHo an'ny amin'Andriamanitra, hanome voninahitra.\nTanana an-tanana isika, handeha hanome voninahitra.\nTanana an-tanana isika, handeha hanome fiderana.",
     "hasSolfa": true,
     "hasMp3": true,
     "hasPlayback": false,
@@ -24,7 +24,7 @@
   {
     "id": "3",
     "title": "Fiderana Izao",
-    "lyrics": "Fiderana izao no hambinina ao am-po, hampifaly ny fanahintsika...",
+    "lyrics": "Fiderana izao no hambinina ao am-po, hampifaly ny fanahintsika.\nFiderana izao no aloaky ny ray sy zanaka.\nMampihina ny nofo sy ny fanahy amin'ny fijaliana.\nMampifaly ny fanahintsika amin'ny fitahiana.\nFiderana izao no hambinina ao am-po, hampifaly ny fanahintsika.\nFiderana izao no aloaky ny ray sy zanaka.",
     "hasSolfa": false,
     "hasMp3": true,
     "hasPlayback": true,
@@ -35,7 +35,7 @@
   {
     "id": "4",
     "title": "Fihirana Vaovao",
-    "lyrics": "Fihirana vaovao, mifankahery ao amin'ny Tompo...",
+    "lyrics": "Fihirana vaovao, mifankahery ao amin'ny Tompo.\nFihirana vaovao, misisika amin'ny kami.\nMampifaly ny fanahintsika, atsira sy mahaja.\nMampifaly ny fanahintsika amin'ny fitahiana.\nFihirana vaovao, mifankahery ao amin'ny Tompo.\nFihirana vaovao, misisika amin'ny kami.",
     "hasSolfa": true,
     "hasMp3": false,
     "hasPlayback": true,
@@ -46,7 +46,7 @@
   {
     "id": "5",
     "title": "Masina ny Anaranao",
-    "lyrics": "Masina ny anaranao Ry Jesosy, ho fiderana mandrakizay...",
+    "lyrics": "Masina ny anaranao Ry Jesosy, ho fiderana mandrakizay.\nMasina ny anaranao, miloloha anay.\nAo amin'ny lanitra sy amin'ny tany, masina ny anaranao.\nFiderana sy voninahitra mandrakizay, ho an'ny anaranao.\nMasina ny anaranao Ry Jesosy, ho fiderana mandrakizay.\nMasina ny anaranao, miloloha anay.",
     "hasSolfa": true,
     "hasMp3": true,
     "hasPlayback": true,
@@ -57,7 +57,7 @@
   {
     "id": "6",
     "title": "Tazomoka Fiadanana",
-    "lyrics": "Tazomoka fiadanana, ao am-pony ny voninahitra...",
+    "lyrics": "Tazomoka fiadanana, ao am-pony ny voninahitra.\nTazomoka fiadanana amin'ny famindram-po.\nMampihina ny fanahintsika amin'ny fijaliana.\nMampihina ny fanahintsika amin'ny Tompo.\nTazomoka fiadanana, ao am-pony ny voninahitra.\nTazomoka fiadanana amin'ny famindram-po.",
     "hasSolfa": false,
     "hasMp3": true,
     "hasPlayback": false,
@@ -68,7 +68,7 @@
   {
     "id": "7",
     "title": "Fitahiana Mandrakizay",
-    "lyrics": "Fitahiana mandrakizay ho an'ny alahady sy alatsinainy...",
+    "lyrics": "Fitahiana mandrakizay ho an'ny alahady sy alatsinainy.\nFitahiana mandrakizay, miloloha anay.\nAo amin'ny fomba sy lalan'ny Tompo, fitahiana mandrakizay.\nHo fiderana sy voninahitra, fitahiana mandrakizay.\nFitahiana mandrakizay ho an'ny alahady sy alatsinainy.\nFitahiana mandrakizay, miloloha anay.",
     "hasSolfa": true,
     "hasMp3": false,
     "hasPlayback": false,
@@ -79,7 +79,7 @@
   {
     "id": "8",
     "title": "Tombontsoa Amin'Ny Finoana",
-    "lyrics": "Ny tombontsoa amin'ny finoana, manazava ny lalana...",
+    "lyrics": "Ny tombontsoa amin'ny finoana, manazava ny lalana.\nNy tombontsoa amin'ny finoana, miloloha anay.\nManome fahasahirana sy fiadanana, ny finoana amin'ny Tompo.\nManome fanampiana amin'ny fahasahirana, ny finoana amin'ny Tompo.\nNy tombontsoa amin'ny finoana, manazava ny lalana.\nNy tombontsoa amin'ny finoana, miloloha anay.",
     "hasSolfa": true,
     "hasMp3": true,
     "hasPlayback": true,
@@ -90,7 +90,7 @@
   {
     "id": "9",
     "title": "Fanoloran-tena",
-    "lyrics": "Fanoloran-tena tanteraka amin'ny Ray sy Zanaka ary Fanahy Masina...",
+    "lyrics": "Fanoloran-tena tanteraka amin'ny Ray sy Zanaka ary fanahy masina.\nFanoloran-tena, miloloha anay amin'ny Tompo.\nManome ny fanahy sy ny fomba, ao am-po ny fitahiana.\nManome ny fanahy sy ny fomba, miloloha anay.\nFanoloran-tena tanteraka amin'ny Ray sy Zanaka ary fanahy masina.\nFanoloran-tena, miloloha anay amin'ny Tompo.",
     "hasSolfa": false,
     "hasMp3": true,
     "hasPlayback": true,
@@ -101,7 +101,7 @@
   {
     "id": "10",
     "title": "Hira Fisaorana",
-    "lyrics": "Hira fisaorana entina ho an'Andriamanitra izay nampahery anay...",
+    "lyrics": "Hira fisaorana entina ho an'Andriamanitra izay nampahery anay.\nHira fisaorana, miloloha anay amin'ny Tompo.\nFisaorana sy fahamindram-po, ho an'ny Andriamanitra.\nFisaorana sy fahamindram-po, miloloha anay.\nHira fisaorana entina ho an'Andriamanitra izay nampahery anay.\nHira fisaorana, miloloha anay amin'ny Tompo.",
     "hasSolfa": true,
     "hasMp3": false,
     "hasPlayback": true,

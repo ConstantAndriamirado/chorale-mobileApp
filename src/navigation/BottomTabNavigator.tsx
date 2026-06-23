@@ -1,6 +1,7 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React from "react";
+import { getAppColors, useAppSettings } from "../hooks/useAppSettings";
 import AccueilScreen from "../screens/accueil/AccueilScreen";
 import Mp3Screen from "../screens/mp3/Mp3Screen";
 import ParolesScreen from "../screens/paroles/ParolesScreen";
@@ -8,9 +9,21 @@ import PlaybackScreen from "../screens/playback/PlaybackScreen";
 import SettingsScreen from "../screens/settings/SettingsScreen";
 import SolfaScreen from "../screens/solfa/SolfaScreen";
 
-const Tab = createBottomTabNavigator();
+export type BottomTabParamList = {
+  Accueil: undefined;
+  Paroles: undefined;
+  Playback: undefined;
+  Solfa: undefined;
+  MP3: undefined;
+  Paramètres: undefined;
+};
+
+const Tab = createBottomTabNavigator<BottomTabParamList>();
 
 export function BottomTabNavigator() {
+  const { theme, fontScale, fontFamilyName } = useAppSettings();
+  const colors = getAppColors(theme);
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -19,19 +32,26 @@ export function BottomTabNavigator() {
           position: "absolute",
           left: 16,
           right: 16,
-          bottom: 12,
-          height: 64,
-          borderRadius: 16,
-          backgroundColor: "#ffffff",
-          paddingBottom: 10,
-          paddingTop: 8,
-          // shadow
+          bottom: 2,
+          height: 60,
+          borderRadius: 24,
+          backgroundColor: colors.card,
+          borderWidth: 1,
+          borderColor: colors.border,
+          paddingBottom: 0,
+          paddingTop: 0,
           shadowColor: "#000",
-          shadowOffset: { width: 0, height: 6 },
+          shadowOffset: { width: 0, height: 12 },
           shadowOpacity: 0.12,
-          shadowRadius: 8,
-          elevation: 8,
+          shadowRadius: 16,
+          elevation: 10,
         },
+        tabBarLabelStyle: {
+          fontFamily: fontFamilyName,
+          fontSize: 12 * fontScale,
+        },
+        tabBarActiveTintColor: colors.primary,
+        tabBarInactiveTintColor: colors.textSecondary,
         tabBarIcon: ({ color, size }) => {
           let iconName: React.ComponentProps<typeof MaterialIcons>["name"] =
             "home";
