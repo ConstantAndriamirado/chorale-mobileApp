@@ -8,6 +8,7 @@ import {
 import React, { useEffect, useState } from "react";
 import {
   Alert,
+  Dimensions,
   Pressable,
   SafeAreaView,
   ScrollView,
@@ -187,7 +188,10 @@ export default function SongDetailScreen() {
         style={styles.scrollContainer}
         contentContainerStyle={[
           styles.scrollContent,
-          { backgroundColor: colors.background },
+          {
+            backgroundColor: colors.background,
+            paddingBottom: Dimensions.get("window").height * 0.22,
+          },
         ]}
       >
         <Text
@@ -204,26 +208,44 @@ export default function SongDetailScreen() {
         </Text>
       </ScrollView>
 
-      {/* Bottom action buttons */}
-      <View style={[styles.buttonContainer, { borderTopColor: colors.border }]}>
-        <Button
-          title={getSolfaButtonText()}
-          onPress={handleSolfaPress}
-          variant="primary"
-          disabled={!song.hasSolfa}
-        />
-        <Button
-          title={getMp3ButtonText()}
-          onPress={handleMp3Press}
-          variant="secondary"
-          disabled={!song.hasMp3}
-        />
-        <Button
-          title={getPlaybackButtonText()}
-          onPress={handlePlaybackPress}
-          variant="secondary"
-          disabled={!song.hasPlayback}
-        />
+      {/* Bottom action buttons positioned at 70% of screen height */}
+      <View
+        style={[
+          styles.buttonContainer,
+          {
+            borderTopColor: colors.border,
+            position: "absolute",
+            left: 0,
+            right: 0,
+            top: Dimensions.get("window").height * 0.8,
+            zIndex: 10,
+          },
+        ]}
+      >
+        <View style={styles.buttonScaleWrapper}>
+          <Button
+            title={getSolfaButtonText()}
+            onPress={handleSolfaPress}
+            variant="primary"
+            disabled={!song.hasSolfa}
+          />
+        </View>
+        <View style={styles.buttonScaleWrapper}>
+          <Button
+            title={getMp3ButtonText()}
+            onPress={handleMp3Press}
+            variant="secondary"
+            disabled={!song.hasMp3}
+          />
+        </View>
+        <View style={styles.buttonScaleWrapper}>
+          <Button
+            title={getPlaybackButtonText()}
+            onPress={handlePlaybackPress}
+            variant="secondary"
+            disabled={!song.hasPlayback}
+          />
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -265,10 +287,12 @@ const styles = StyleSheet.create({
     lineHeight: 24,
   },
   buttonContainer: {
-    paddingHorizontal: 20,
-    paddingVertical: 16,
-    paddingBottom: 80,
-    gap: 12,
+    paddingHorizontal: 15,
+    paddingVertical: 2,
+    gap: 5,
     borderTopWidth: 1,
+  },
+  buttonScaleWrapper: {
+    transform: [{ scaleY: 0.95 }],
   },
 });
