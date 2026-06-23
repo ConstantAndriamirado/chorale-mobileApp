@@ -108,5 +108,16 @@
     "solfaFileName": "solfa-fisaorana.pdf",
     "mp3FileName": "",
     "playbackFileName": "playback-fisaorana.mp3"
+  },
+  {
+    "id": "11",
+    "title": "NOELY SOA",
+    "lyrics": "1.\nTonga indray ny Noely soa,\nMamiratra ny lanitra avo.\nMifaly ny fo sy fanahy,\nFa teraka ny Mpanjaka vaovao.\nEntintsika ny hira sy dera,\nHo an’Ilay Zazakely masina.\nFiadanana sy fahasoavana,\nNo atolony ho an’izao tontolo izao.\n\nRefrain\nNoely soa, Noely sambatra,\nAndao hiara-hihoby sy hidera.\nTeraka ho antsika ny Mpamonjy,\nKa aoka ny fontsika hifaly.\nNoely soa, Noely sambatra,\nMiravoravo ny tany sy ny lanitra.\nVoninahitra ho an’Andriamanitra,\nFiadanana ho an’ny olombelona.\n\n2.\nMitsiky ny ankizy rehetra,\nMandre ny hafatra mahafaly.\nNy kintana mamirapiratra,\nMitarika amin’ny làlana tsara.\nMivory ny fianakaviana,\nMifampizara hafanana sy fitia.\nAo am-po no tena fanomezana,\nDia ny fitiavana avy amin’ny Ray.\n\nRefrain\nNoely soa, Noely sambatra,\nAndao hiara-hihoby sy hidera.\nTeraka ho antsika ny Mpamonjy,\nKa aoka ny fontsika hifaly.\nNoely soa, Noely sambatra,\nMiravoravo ny tany sy ny lanitra.\nVoninahitra ho an’Andriamanitra,\nFiadanana ho an’ny olombelona.\n\n3.\nAny an-tsaha ny mpiandry ondry,\nNandre ny feon’ny anjely maro.\nNitory hafatra feno hafaliana,\nFa tonga ny andro famonjena.\nNitsaoka tamim-panetre-tena,\nIreo nahita ny Zaza masina.\nNentin’izy ireo ny fankasitrahana,\nSy ny dera avy amin’ny fo rehetra.\n\nRefrain\nNoely soa, Noely sambatra,\nAndao hiara-hihoby sy hidera.\nTeraka ho antsika ny Mpamonjy,\nKa aoka ny fontsika hifaly.\nNoely soa, Noely sambatra,\nMiravoravo ny tany sy ny lanitra.\nVoninahitra ho an’Andriamanitra,\nFiadanana ho an’ny olombelona.\n\n4.\nAnkehitriny sy mandrakizay,\nAoka ny fitiavana hitoetra.\nHo fanilo manazava lalana,\nHo hery mandresy ny haizina.\nMankalaza amin-kafaliana,\nNy fahatongavan’ny Tompo ety.\nKa hiaraka hihira isika,\nFa Noely soa no nomena antsika.\n\nRefrain\nNoely soa, Noely sambatra,\nAndao hiara-hihoby sy hidera.\nTeraka ho antsika ny Mpamonjy,\nKa aoka ny fontsika hifaly.\nNoely soa, Noely sambatra,\nMiravoravo ny tany sy ny lanitra.\nVoninahitra ho an’Andriamanitra,\nFiadanana ho an’ny olombelona.",
+    "hasSolfa": true,
+    "hasMp3": true,
+    "hasPlayback": true,
+    "solfaFileName": "solfa-noely-soa.pdf",
+    "mp3FileName": "mp3-noely-soa.mp3",
+    "playbackFileName": "playback-noely-soa.mp3"
   }
 ]

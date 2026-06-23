@@ -72,11 +72,12 @@ export function Button({
 
 const styles = StyleSheet.create({
   button: {
-    borderRadius: 14,
-    paddingVertical: 14,
-    paddingHorizontal: 18,
+    borderRadius: 12,
+    paddingVertical: 8,
+    paddingHorizontal: 10,
     alignItems: "center",
     justifyContent: "center",
+    minHeight: 34,
   },
   primary: {},
   secondary: {},
@@ -86,7 +87,7 @@ const styles = StyleSheet.create({
   text: {
     color: "#FFFFFF",
     fontWeight: "700",
-    fontSize: 16,
+    fontSize: 12,
   },
   textSecondary: {},
   textDisabled: {

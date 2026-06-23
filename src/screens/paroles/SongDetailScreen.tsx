@@ -5,10 +5,11 @@ import {
   useNavigation,
   useRoute,
 } from "@react-navigation/native";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
-  Alert,
+  Animated,
   Dimensions,
+  Modal,
   Pressable,
   SafeAreaView,
   ScrollView,
@@ -21,6 +22,18 @@ import { useAppSettings } from "../../hooks/useAppSettings";
 import { AppStackParamList } from "../../navigation/AppNavigator";
 import { isDownloaded } from "../../services/download/downloadService";
 
+type ModalAction = {
+  text: string;
+  onPress?: () => void;
+  style?: "default" | "cancel" | "destructive";
+};
+
+type ModalConfig = {
+  title: string;
+  message: string;
+  actions: ModalAction[];
+};
+
 export default function SongDetailScreen() {
   const navigation = useNavigation<NavigationProp<AppStackParamList>>();
   const route = useRoute<RouteProp<AppStackParamList, "SongDetail">>();
@@ -30,6 +43,42 @@ export default function SongDetailScreen() {
   const [solfaDownloaded, setSolfaDownloaded] = useState(false);
   const [mp3Downloaded, setMp3Downloaded] = useState(false);
   const [playbackDownloaded, setPlaybackDownloaded] = useState(false);
+  const [modalConfig, setModalConfig] = useState<ModalConfig | null>(null);
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+  const scaleAnim = useRef(new Animated.Value(0.95)).current;
+
+  const openModal = (
+    title: string,
+    message: string,
+    actions: ModalAction[],
+  ) => {
+    setModalConfig({ title, message, actions });
+  };
+
+  const closeModal = () => {
+    setModalConfig(null);
+  };
+
+  useEffect(() => {
+    if (!modalConfig) {
+      fadeAnim.setValue(0);
+      scaleAnim.setValue(0.95);
+      return;
+    }
+
+    Animated.parallel([
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 220,
+        useNativeDriver: true,
+      }),
+      Animated.timing(scaleAnim, {
+        toValue: 1,
+        duration: 220,
+        useNativeDriver: true,
+      }),
+    ]).start();
+  }, [fadeAnim, modalConfig, scaleAnim]);
 
   // Load download states
   useEffect(() => {
@@ -53,13 +102,16 @@ export default function SongDetailScreen() {
   // Solfa button handler
   const handleSolfaPress = () => {
     if (solfaDownloaded) {
-      Alert.alert("Info", "Ouverture du fichier Solfa");
+      openModal("Solfa", "Ouverture du fichier Solfa", [
+        { text: "OK", onPress: closeModal },
+      ]);
     } else {
       if (!song.hasSolfa) {
-        Alert.alert("Info", "Solfa non disponible pour cette chanson");
+        openModal("Info", "Solfa non disponible pour cette chanson", [
+          { text: "OK", onPress: closeModal },
+        ]);
         return;
       }
-      // Navigate to nested Solfa tab via Main
       navigation.navigate("Main", {
         screen: "Solfa",
       });
@@ -69,26 +121,28 @@ export default function SongDetailScreen() {
   // MP3 button handler
   const handleMp3Press = () => {
     if (mp3Downloaded) {
-      Alert.alert("Lecteur MP3", "Ouverture du lecteur pour ce fichier");
+      openModal("Lecteur MP3", "Ouverture du lecteur pour ce fichier", [
+        { text: "OK", onPress: closeModal },
+      ]);
     } else {
       if (!song.hasMp3) {
-        Alert.alert("Info", "MP3 non disponible pour cette chanson");
+        openModal("Info", "MP3 non disponible pour cette chanson", [
+          { text: "OK", onPress: closeModal },
+        ]);
         return;
       }
-      // Show alert with options
-      Alert.alert("Lire MP3", "Sélectionnez une option", [
+      openModal("Lire MP3", "Sélectionnez une option", [
         {
           text: "Jouer en ligne",
           onPress: () => {
-            Alert.alert("Lecteur", "Lecture en ligne du fichier MP3", [
-              { text: "OK" },
+            openModal("Lecture", "Lecture en ligne du fichier MP3", [
+              { text: "OK", onPress: closeModal },
             ]);
           },
         },
         {
           text: "Télécharger",
           onPress: () => {
-            // Navigate to nested MP3 tab via Main
             navigation.navigate("Main", {
               screen: "MP3",
             });
@@ -96,7 +150,7 @@ export default function SongDetailScreen() {
         },
         {
           text: "Annuler",
-          onPress: () => {},
+          onPress: closeModal,
           style: "cancel",
         },
       ]);
@@ -106,26 +160,28 @@ export default function SongDetailScreen() {
   // Playback button handler
   const handlePlaybackPress = () => {
     if (playbackDownloaded) {
-      Alert.alert("Lecteur Playback", "Ouverture du lecteur pour ce fichier");
+      openModal("Lecteur Playback", "Ouverture du lecteur pour ce fichier", [
+        { text: "OK", onPress: closeModal },
+      ]);
     } else {
       if (!song.hasPlayback) {
-        Alert.alert("Info", "Playback non disponible pour cette chanson");
+        openModal("Info", "Playback non disponible pour cette chanson", [
+          { text: "OK", onPress: closeModal },
+        ]);
         return;
       }
-      // Show alert with options
-      Alert.alert("Lire Playback", "Sélectionnez une option", [
+      openModal("Lire Playback", "Sélectionnez une option", [
         {
           text: "Jouer en ligne",
           onPress: () => {
-            Alert.alert("Lecteur", "Lecture en ligne du fichier Playback", [
-              { text: "OK" },
+            openModal("Lecture", "Lecture en ligne du fichier Playback", [
+              { text: "OK", onPress: closeModal },
             ]);
           },
         },
         {
           text: "Télécharger",
           onPress: () => {
-            // Navigate to nested Playback tab via Main
             navigation.navigate("Main", {
               screen: "Playback",
             });
@@ -133,7 +189,7 @@ export default function SongDetailScreen() {
         },
         {
           text: "Annuler",
-          onPress: () => {},
+          onPress: closeModal,
           style: "cancel",
         },
       ]);
@@ -143,17 +199,17 @@ export default function SongDetailScreen() {
   // Get button text
   const getSolfaButtonText = () => {
     if (!song.hasSolfa) return "Solfa indisponible";
-    return solfaDownloaded ? "Ouvrir Solfa" : "Télécharger Solfa";
+    return solfaDownloaded ? "Ouvrir Solfa" : "⬇ Solfa";
   };
 
   const getMp3ButtonText = () => {
     if (!song.hasMp3) return "MP3 indisponible";
-    return mp3Downloaded ? "Jouer MP3" : "Télécharger MP3";
+    return mp3Downloaded ? "Jouer MP3" : "⬇ MP3";
   };
 
   const getPlaybackButtonText = () => {
     if (!song.hasPlayback) return "Playback indisponible";
-    return playbackDownloaded ? "Jouer Playback" : "Télécharger Playback";
+    return playbackDownloaded ? "Jouer Playback" : "⬇ Playback";
   };
 
   return (
@@ -214,10 +270,11 @@ export default function SongDetailScreen() {
           styles.buttonContainer,
           {
             borderTopColor: colors.border,
+            backgroundColor: colors.card,
             position: "absolute",
             left: 0,
             right: 0,
-            top: Dimensions.get("window").height * 0.75,
+            bottom: 0,
             zIndex: 10,
           },
         ]}
@@ -247,6 +304,88 @@ export default function SongDetailScreen() {
           />
         </View>
       </View>
+
+      <Modal
+        transparent
+        visible={Boolean(modalConfig)}
+        animationType="none"
+        onRequestClose={closeModal}
+      >
+        <Pressable style={styles.modalOverlay} onPress={closeModal}>
+          <Pressable
+            style={styles.modalPressArea}
+            onPress={(event) => event.stopPropagation()}
+          >
+            <Animated.View
+              style={[
+                styles.modalCard,
+                {
+                  backgroundColor: colors.card,
+                  borderColor: colors.border,
+                  opacity: fadeAnim,
+                  transform: [{ scale: scaleAnim }],
+                },
+              ]}
+            >
+              <Text
+                style={[
+                  styles.modalTitle,
+                  { color: colors.text, fontFamily: fontFamilyName },
+                ]}
+              >
+                {modalConfig?.title}
+              </Text>
+              <Text
+                style={[
+                  styles.modalMessage,
+                  { color: colors.textSecondary, fontFamily: fontFamilyName },
+                ]}
+              >
+                {modalConfig?.message}
+              </Text>
+
+              <View style={styles.modalActions}>
+                {modalConfig?.actions.map((action, index) => (
+                  <Pressable
+                    key={`${action.text}-${index}`}
+                    onPress={() => {
+                      closeModal();
+                      action.onPress?.();
+                    }}
+                    style={[
+                      styles.modalActionButton,
+                      action.style === "cancel"
+                        ? [
+                            styles.cancelButton,
+                            { backgroundColor: colors.secondaryBackground },
+                          ]
+                        : [
+                            styles.primaryButton,
+                            { backgroundColor: colors.primary },
+                          ],
+                    ]}
+                  >
+                    <Text
+                      style={[
+                        styles.modalActionText,
+                        {
+                          color:
+                            action.style === "cancel"
+                              ? colors.text
+                              : colors.white,
+                          fontFamily: fontFamilyName,
+                        },
+                      ]}
+                    >
+                      {action.text}
+                    </Text>
+                  </Pressable>
+                ))}
+              </View>
+            </Animated.View>
+          </Pressable>
+        </Pressable>
+      </Modal>
     </SafeAreaView>
   );
 }
@@ -287,12 +426,69 @@ const styles = StyleSheet.create({
     lineHeight: 24,
   },
   buttonContainer: {
-    paddingHorizontal: 15,
-    paddingVertical: 2,
-    gap: 5,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    gap: 4,
     borderTopWidth: 1,
   },
   buttonScaleWrapper: {
-    transform: [{ scaleY: 0.95 }],
+    flex: 1,
+  },
+  modalOverlay: {
+    flex: 1,
+    justifyContent: "center",
+    padding: 24,
+    backgroundColor: "rgba(2, 8, 23, 0.5)",
+  },
+  modalPressArea: {
+    alignItems: "center",
+  },
+  modalCard: {
+    width: "100%",
+    maxWidth: 360,
+    borderRadius: 20,
+    padding: 18,
+    borderWidth: 1,
+    elevation: 8,
+    shadowColor: "#000",
+    shadowOpacity: 0.2,
+    shadowRadius: 12,
+    shadowOffset: { width: 0, height: 6 },
+    overflow: "hidden",
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: "700",
+    marginBottom: 8,
+    textAlign: "left",
+  },
+  modalMessage: {
+    fontSize: 14,
+    lineHeight: 20,
+    marginBottom: 16,
+    textAlign: "left",
+  },
+  modalActions: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    gap: 8,
+    flexWrap: "wrap",
+  },
+  modalActionButton: {
+    borderRadius: 999,
+    paddingVertical: 10,
+    paddingHorizontal: 14,
+    minWidth: 76,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  primaryButton: {},
+  cancelButton: {},
+  modalActionText: {
+    fontSize: 13,
+    fontWeight: "700",
   },
 });
