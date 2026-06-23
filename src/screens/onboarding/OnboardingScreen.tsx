@@ -12,19 +12,29 @@ export default function OnboardingScreen() {
 
   useEffect(() => {
     if (activeIndex >= slides.length) {
-      navigation.navigate("Main" as never);
+      // mark onboarding complete and reset navigation to Main
+      setOnboardingComplete(true);
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "Main" as never }],
+      } as never);
     }
   }, [activeIndex, navigation, slides.length]);
 
   const handleContinue = () => {
     if (activeIndex === slides.length - 1) {
-      navigation.navigate("Main" as never);
+      setOnboardingComplete(true);
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "Main" as never }],
+      } as never);
     } else {
       setActiveIndex(activeIndex + 1);
     }
   };
 
-  const { colors, fontFamilyName, fontScale } = useAppSettings();
+  const { colors, fontFamilyName, fontScale, setOnboardingComplete } =
+    useAppSettings();
   const slide = slides[activeIndex];
   return (
     <SafeAreaView

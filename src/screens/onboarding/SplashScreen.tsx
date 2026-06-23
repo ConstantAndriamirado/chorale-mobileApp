@@ -6,15 +6,27 @@ import { useAppSettings } from "../../hooks/useAppSettings";
 
 export default function SplashScreen() {
   const navigation = useNavigation();
-  const { colors, fontFamilyName, fontScale } = useAppSettings();
+  const { colors, fontFamilyName, fontScale, onboardingComplete } =
+    useAppSettings();
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      navigation.navigate("Onboarding" as never);
+      // if onboarding already completed, go straight to Main, otherwise show onboarding
+      if (onboardingComplete) {
+        navigation.reset({
+          index: 0,
+          routes: [{ name: "Main" as never }],
+        } as never);
+      } else {
+        navigation.reset({
+          index: 0,
+          routes: [{ name: "Onboarding" as never }],
+        } as never);
+      }
     }, 4000);
 
     return () => clearTimeout(timeout);
-  }, [navigation]);
+  }, [navigation, onboardingComplete]);
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>

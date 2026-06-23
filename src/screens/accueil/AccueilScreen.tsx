@@ -1,5 +1,14 @@
-import React from "react";
-import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
+import React, { useEffect } from "react";
+import {
+  Alert,
+  BackHandler,
+  Platform,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { Card } from "../../components/common/Card";
 import songsData from "../../data/songs.json";
 import { useAppSettings } from "../../hooks/useAppSettings";
@@ -9,6 +18,32 @@ export default function AccueilScreen() {
   const songs = songsData;
   const downloadedSolfa = songs.filter((song) => song.hasSolfa).length;
   const downloadedMp3 = songs.filter((song) => song.hasMp3).length;
+
+  useEffect(() => {
+    if (Platform.OS !== "android") return;
+
+    const onBackPress = () => {
+      Alert.alert(
+        "Quitter l'application",
+        "Voulez-vous quitter l'application ?",
+        [
+          { text: "Non", style: "cancel" },
+          {
+            text: "Quitter",
+            style: "destructive",
+            onPress: () => BackHandler.exitApp(),
+          },
+        ],
+      );
+      return true; // prevent default behavior
+    };
+
+    const subscription = BackHandler.addEventListener(
+      "hardwareBackPress",
+      onBackPress,
+    );
+    return () => subscription.remove();
+  }, []);
 
   return (
     <SafeAreaView
@@ -164,6 +199,8 @@ export default function AccueilScreen() {
     </SafeAreaView>
   );
 }
+
+// intercept hardware back on Android handled in useEffect above
 
 const styles = StyleSheet.create({
   safeArea: {

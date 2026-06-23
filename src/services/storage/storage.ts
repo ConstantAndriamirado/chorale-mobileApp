@@ -24,9 +24,11 @@ export type SettingsState = {
   theme: ThemeMode;
   fontScale: number;
   fontFamily: FontFamilyOption;
+  onboardingComplete: boolean;
   setTheme: (theme: ThemeMode) => void;
   setFontScale: (fontScale: number) => void;
   setFontFamily: (fontFamily: FontFamilyOption) => void;
+  setOnboardingComplete: (done: boolean) => void;
 };
 
 const asyncStorage = {
@@ -47,9 +49,12 @@ export const useSettingsStore = create<SettingsState>()(
       theme: "light",
       fontScale: 1,
       fontFamily: "System",
+      onboardingComplete: false,
       setTheme: (theme: ThemeMode) => set({ theme }),
       setFontScale: (fontScale: number) => set({ fontScale }),
       setFontFamily: (fontFamily: FontFamilyOption) => set({ fontFamily }),
+      setOnboardingComplete: (done: boolean) =>
+        set({ onboardingComplete: done }),
     }),
     {
       name: "afi-chorale-settings",

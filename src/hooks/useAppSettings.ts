@@ -141,6 +141,12 @@ export function useAppSettings() {
   const theme = useSettingsStore((state) => state.theme);
   const fontScale = useSettingsStore((state) => state.fontScale);
   const fontFamily = useSettingsStore((state) => state.fontFamily);
+  const onboardingComplete = useSettingsStore(
+    (state) => state.onboardingComplete,
+  );
+  const setOnboardingComplete = useSettingsStore(
+    (state) => state.setOnboardingComplete,
+  );
 
   return {
     theme,
@@ -148,5 +154,7 @@ export function useAppSettings() {
     fontFamily,
     colors: getAppColors(theme),
     fontFamilyName: getAppFontFamily(fontFamily),
+    onboardingComplete,
+    setOnboardingComplete,
   };
 }
