@@ -1,0 +1,112 @@
+[
+  {
+    "id": "1",
+    "title": "Antema Fiderana",
+    "lyrics": "Antema fiderana ho an'Andriamanitra, ny fitahiana tokoa...",
+    "hasSolfa": true,
+    "hasMp3": true,
+    "hasPlayback": true,
+    "solfaFileName": "solfa-antema.pdf",
+    "mp3FileName": "mp3-antema.mp3",
+    "playbackFileName": "playback-antema.mp3"
+  },
+  {
+    "id": "2",
+    "title": "Tanana An-tanana",
+    "lyrics": "Tanana an-tanana isika, handeha hanome voninahitra...",
+    "hasSolfa": true,
+    "hasMp3": true,
+    "hasPlayback": false,
+    "solfaFileName": "solfa-tanana.pdf",
+    "mp3FileName": "mp3-tanana.mp3",
+    "playbackFileName": ""
+  },
+  {
+    "id": "3",
+    "title": "Fiderana Izao",
+    "lyrics": "Fiderana izao no hambinina ao am-po, hampifaly ny fanahintsika...",
+    "hasSolfa": false,
+    "hasMp3": true,
+    "hasPlayback": true,
+    "solfaFileName": "",
+    "mp3FileName": "mp3-fiderana.mp3",
+    "playbackFileName": "playback-fiderana.mp3"
+  },
+  {
+    "id": "4",
+    "title": "Fihirana Vaovao",
+    "lyrics": "Fihirana vaovao, mifankahery ao amin'ny Tompo...",
+    "hasSolfa": true,
+    "hasMp3": false,
+    "hasPlayback": true,
+    "solfaFileName": "solfa-fihirana.pdf",
+    "mp3FileName": "",
+    "playbackFileName": "playback-fihirana.mp3"
+  },
+  {
+    "id": "5",
+    "title": "Masina ny Anaranao",
+    "lyrics": "Masina ny anaranao Ry Jesosy, ho fiderana mandrakizay...",
+    "hasSolfa": true,
+    "hasMp3": true,
+    "hasPlayback": true,
+    "solfaFileName": "solfa-masina.pdf",
+    "mp3FileName": "mp3-masina.mp3",
+    "playbackFileName": "playback-masina.mp3"
+  },
+  {
+    "id": "6",
+    "title": "Tazomoka Fiadanana",
+    "lyrics": "Tazomoka fiadanana, ao am-pony ny voninahitra...",
+    "hasSolfa": false,
+    "hasMp3": true,
+    "hasPlayback": false,
+    "solfaFileName": "",
+    "mp3FileName": "mp3-tazomoka.mp3",
+    "playbackFileName": ""
+  },
+  {
+    "id": "7",
+    "title": "Fitahiana Mandrakizay",
+    "lyrics": "Fitahiana mandrakizay ho an'ny alahady sy alatsinainy...",
+    "hasSolfa": true,
+    "hasMp3": false,
+    "hasPlayback": false,
+    "solfaFileName": "solfa-fitahiana.pdf",
+    "mp3FileName": "",
+    "playbackFileName": ""
+  },
+  {
+    "id": "8",
+    "title": "Tombontsoa Amin'Ny Finoana",
+    "lyrics": "Ny tombontsoa amin'ny finoana, manazava ny lalana...",
+    "hasSolfa": true,
+    "hasMp3": true,
+    "hasPlayback": true,
+    "solfaFileName": "solfa-tombontsoa.pdf",
+    "mp3FileName": "mp3-tombontsoa.mp3",
+    "playbackFileName": "playback-tombontsoa.mp3"
+  },
+  {
+    "id": "9",
+    "title": "Fanoloran-tena",
+    "lyrics": "Fanoloran-tena tanteraka amin'ny Ray sy Zanaka ary Fanahy Masina...",
+    "hasSolfa": false,
+    "hasMp3": true,
+    "hasPlayback": true,
+    "solfaFileName": "",
+    "mp3FileName": "mp3-fanoloran-tena.mp3",
+    "playbackFileName": "playback-fanoloran-tena.mp3"
+  },
+  {
+    "id": "10",
+    "title": "Hira Fisaorana",
+    "lyrics": "Hira fisaorana entina ho an'Andriamanitra izay nampahery anay...",
+    "hasSolfa": true,
+    "hasMp3": false,
+    "hasPlayback": true,
+    "solfaFileName": "solfa-fisaorana.pdf",
+    "mp3FileName": "",
+    "playbackFileName": "playback-fisaorana.mp3"
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "id": "1",
+    "title": "Bienvenue à AFI Chorale",
+    "description": "Antema Fiderana FJKM Fehizoro Mampiray Fianarantsoa, votre espace pour les chants et ressources chorales.",
+    "icon": "🎵"
+  },
+  {
+    "id": "2",
+    "title": "Paroles, Solfa, MP3 et Playback",
+    "description": "Accédez facilement aux paroles, solfa, fichiers MP3 et playback depuis votre téléphone.",
+    "icon": "📥"
+  },
+  {
+    "id": "3",
+    "title": "Fonctionnalité hors ligne",
+    "description": "Téléchargez les solfa, MP3 et playback pour une consultation même sans connexion.",
+    "icon": "🌐"
+  }
+]
