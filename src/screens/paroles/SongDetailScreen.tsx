@@ -217,7 +217,7 @@ export default function SongDetailScreen() {
             position: "absolute",
             left: 0,
             right: 0,
-            top: Dimensions.get("window").height * 0.8,
+            top: Dimensions.get("window").height * 0.75,
             zIndex: 10,
           },
         ]}
@@ -278,7 +278,7 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     flex: 1,
-    marginTop: 24,
+    marginTop: 5,
   },
   scrollContent: {
     padding: 20,
