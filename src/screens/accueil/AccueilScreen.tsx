@@ -1,3 +1,4 @@
+import { useIsFocused } from "@react-navigation/native";
 import React, { useEffect } from "react";
 import {
   Alert,
@@ -18,11 +19,13 @@ export default function AccueilScreen() {
   const songs = songsData;
   const downloadedSolfa = songs.filter((song) => song.hasSolfa).length;
   const downloadedMp3 = songs.filter((song) => song.hasMp3).length;
+  const isFocused = useIsFocused();
 
   useEffect(() => {
     if (Platform.OS !== "android") return;
 
     const onBackPress = () => {
+      // only show exit prompt on Accueil when focused
       Alert.alert(
         "Quitter l'application",
         "Voulez-vous quitter l'application ?",
@@ -38,12 +41,18 @@ export default function AccueilScreen() {
       return true; // prevent default behavior
     };
 
-    const subscription = BackHandler.addEventListener(
-      "hardwareBackPress",
-      onBackPress,
-    );
-    return () => subscription.remove();
-  }, []);
+    let subscription: { remove: () => void } | undefined;
+    if (isFocused) {
+      subscription = BackHandler.addEventListener(
+        "hardwareBackPress",
+        onBackPress,
+      );
+    }
+
+    return () => {
+      subscription?.remove();
+    };
+  }, [isFocused]);
 
   return (
     <SafeAreaView
